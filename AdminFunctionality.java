@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class AdminFunctionality {
     static Scanner sc = new Scanner(System.in);
-   static RoomBookingUS_11[] roomBookings = new RoomBookingUS_11[100];
-   static int roomBookingsCount = 0;
+    static RoomBookingUS_11[] roomBookings = new RoomBookingUS_11[100];
+    static int roomBookingsCount = 0;
 
     public static void adminMenu() {
         int ch;
@@ -55,8 +55,33 @@ public class AdminFunctionality {
     }
 
     public static void adminBookingHistoryById() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'adminBookingHistoryById'");
+        System.out.println("Search Bookings by user id");
+        System.out.println("Enter User ID");
+        int uid = sc.nextInt();
+        for (int i = 0; i < HotelManagement.uindex; i++) {
+            if (uid == HotelManagement.user[i].getId()) {
+
+                System.out.println("Booking History of " + HotelManagement.user[i].getName() + "are : ");
+                for (int j = 0; i < roomBookingsCount; j++) {
+                    if (roomBookings[j].getCustomer_id() == HotelManagement.user[i].getId()) {
+                        printBookings(roomBookings[j]);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void printBookings(RoomBookingUS_11 c) {
+        System.out.print("Customer Id: ");
+        System.out.println(c.getCustomer_id());
+        System.out.print("Booking ID: ");
+        System.out.println(c.getBookingID());
+        System.out.print("Room Type: ");
+        System.out.println(c.getRoomTypeSelection());
+        System.out.print("Booking Details :");
+        System.out.println(c.getBookingDetails());
+        System.out.print("Price : ");
+        System.out.println(c.getPrice());
     }
 
     public static void adminCheckOutBillingStatus() {
@@ -106,7 +131,7 @@ public class AdminFunctionality {
         } while (ch != 5);
     }
 
-    public  static void adminDeleteBooking() {
+    public static void adminDeleteBooking() {
         System.out.println("Delete Booking Details:");
         System.out.println("Enter Booking id to be Deleted");
         int userID = sc.nextInt();
@@ -127,7 +152,6 @@ public class AdminFunctionality {
             System.err.println("User Doesn't Exist");
         }
 
-        
     }
 
     public static void adminUpdateBooking() {
@@ -144,7 +168,7 @@ public class AdminFunctionality {
                 @SuppressWarnings("unused")
                 String email = sc.next();
                 System.out.println("Enter new Room Type Selection");
-                String new_RoomTypeSelection= sc.next();
+                String new_RoomTypeSelection = sc.next();
                 System.out.println("Enter 1 to Confirm");
                 confirm = sc.nextInt();
                 if (confirm == 1) {
@@ -160,18 +184,20 @@ public class AdminFunctionality {
             System.out.println("Booking ID  Doesn't Exist");
         }
     }
+
     public static void adminAddNewBooking() {
         System.out.println("Please add new Booking:");
         System.out.println("Enter ID");
-        int bid= sc.nextInt();
+        int bid = sc.nextInt();
         System.out.println("Enter Room Type");
-        String roomtype=sc.next();
+        String roomtype = sc.next();
         System.out.println("Enter Booking Details");
-        String bookingDetails= sc.next();
+        String bookingDetails = sc.next();
         System.out.println("Enter Price");
-        double price=sc.nextDouble();
+        double price = sc.nextDouble();
 
-        roomBookings[roomBookingsCount++] = new RoomBookingUS_11(bid, roomtype, bookingDetails, price,HotelManagement.current_user.getId());
+        roomBookings[roomBookingsCount++] = new RoomBookingUS_11(bid, roomtype, bookingDetails, price,
+                HotelManagement.current_user.getId());
         System.out.println("Successfully Registered Booking");
     }
 
