@@ -1,3 +1,4 @@
+
 public class CustomerEntity {
     private int id;
     private String name;
@@ -44,3 +45,4 @@ public CustomerEntity(int id, String name, String email, long mobile, String pas
 
    
 }
+
